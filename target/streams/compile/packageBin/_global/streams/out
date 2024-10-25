@@ -1,0 +1,25 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\minesweeper_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\Main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\Main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\model[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\model[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\model\Field$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\model\Field$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\model\Field.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\model\Field.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	de\htwg\se\minesweeper\model\Field.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\Niklas\Studium\Semester6\SE\Minesweeper2024\target\scala-3.2.2\classes\de\htwg\se\minesweeper\model\Field.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
