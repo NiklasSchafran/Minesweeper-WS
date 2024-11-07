@@ -7,5 +7,6 @@ import model.Field
     println("Welcome to Minesweeper")
     val field1 = new Field(10)
     print(field1.toString())
+    //test
   }
 }
