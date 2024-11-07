@@ -40,5 +40,8 @@ field.xml
 game.json
 game.xml
 
-
 target/
+
+project/
+
+project/target/
