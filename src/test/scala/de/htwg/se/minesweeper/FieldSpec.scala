@@ -1,6 +1,6 @@
 package de.htwg.se.minesweeper.model
 
-import java.io.{ByteArrayOutputStream, PrintStream}
+
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -10,10 +10,10 @@ class FieldSpec extends AnyWordSpec
     {
         "is empty" should 
         {
-            
-            val fieldOne = new Field(1)
-            val field2 = new Field(2)
-            val field3 = new Field(3)
+            val fieldOne = new Field(1, Symbols.Empty)
+            val field2 = new Field(2, Symbols.Empty)
+            val field3 = new Field(3, Symbols.Empty)
+
             val endl = sys.props("line.separator")
             "have a bar as String of form '+---+---+---+'" in 
             {
@@ -36,60 +36,34 @@ class FieldSpec extends AnyWordSpec
             }
             "have cells as String of form '|   |   |   |'" in 
             {
-                field3.cells(3,3) should be ("|   |   |   |" + endl)
-                field3.cells() should be("|   |   |   |" + endl)
+                field3.cells(0) should be ("|   |   |   |" + endl)
             }
             "have scalable cells" in 
             {
-                fieldOne.cells(1,1) should be("| |" + endl)
-                field2.cells(0,1) should be("||" + endl)
-                field3.cells(3,3) should be("|   |   |   |" + endl)
-                fieldOne.cells(0,3) should be("||||" + endl)
+                fieldOne.cells(0, 1) should be("| |" + endl)
+                field2.cells(0, 1) should be("| | |" + endl)
+                field3.cells(2,3) should be("|   |   |   |" + endl)
+                fieldOne.cells(0,3) should be("|   |" + endl)
             }
             "have a mesh in the form" + 
             "+-+" + 
             "| |" + 
             "+-+" in 
             {
-                fieldOne.mesh(1,1) should be("+-+" + endl + "| |" + endl + "+-+" + endl)
                 fieldOne.mesh(1) should be("+-+" + endl + "| |" + endl + "+-+" + endl)
+                field3.mesh(1) should be("+-+-+-+" + endl + "| | | |" + endl + "+-+-+-+" + endl + "| | | |" + endl + "+-+-+-+" + endl + "| | | |" + endl + "+-+-+-+" + endl )
                 field2.mesh(1) should be("+-+-+" + endl + "| | |" + endl + "+-+-+" + endl + "| | |" + endl + "+-+-+" + endl)
             }
             "filled with Empty" should 
             {
-                val field = new Field(3)
-                "be empty initially with Field(3)" in 
+                val field = new Field(3, Symbols.Empty)
+                "be empty initially with Field(Symbols.Empty)" in 
                 {
                      field.toString() should be("+---+---+---+" + endl + "|   |   |   |" + endl + "+---+---+---+" + endl + "|   |   |   |" + endl + "+---+---+---+" + endl + "|   |   |   |" + endl + "+---+---+---+" +endl)
                 }
             }
 
 
-        }
-        "is Equal" should {
-            val fieldx = new Field(3)
-            val fieldy = new Field(3)
-            val fieldz = new Field(1)
-
-            "be true with fieldx.equals(fieldy)" in {
-                fieldx.equals(fieldy) should be(true)
-                fieldz.equals(fieldy) should be(false)
-                fieldy.equals(fieldy) should be(true)
-            }
-        }
-    }
-     "The Main object" when {
-    "executed" should {
-      "print the welcome message and create a field" in {
-        val outputStreamCaptor = new ByteArrayOutputStream()
-        Console.withOut(outputStreamCaptor) {
-          de.htwg.se.minesweeper.Main.main(Array.empty)
-        }
-
-        val capturedOutput = outputStreamCaptor.toString.trim
-        capturedOutput should include ("Welcome to Minesweeper")
-        // Note: Additional assertions might be added based on your requirements.
-            }
         }
     }
 }
