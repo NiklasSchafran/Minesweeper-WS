@@ -21,6 +21,7 @@ jobs:
         curl -Lo cs https://github.com/coursier/coursier/releases/download/v2.1.0/cs-x86_64-pc-linux-generic
         chmod +x cs
         mv cs $HOME/.local/bin
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
 
     - name: Install sbt using Coursier
       run: cs install sbt --home $HOME/.sbt
