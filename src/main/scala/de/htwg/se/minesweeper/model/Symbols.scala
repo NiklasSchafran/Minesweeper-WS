@@ -18,4 +18,3 @@ enum Symbols(representedAsString: String):
     case Six extends Symbols("6")
     case Seven extends Symbols("7")
     case Eight extends Symbols("8")
-    //case F extends Symbols("F")
