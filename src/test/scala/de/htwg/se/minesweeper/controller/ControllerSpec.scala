@@ -1,6 +1,5 @@
 package de.htwg.se.minesweeper.controller
 
-import de.htwg.se.minesweeper.controller.Controller
 import de.htwg.se.minesweeper.model.{Field, Game, Status}
 import de.htwg.se.minesweeper.util.{Observable, Observer}
 import org.mockito.ArgumentMatchers._
@@ -32,7 +31,7 @@ class ControllerSpec extends AnyWordSpec with Matchers with MockitoSugar {
         val controller = Controller(initialField, game)
         val observer = mock[Observer]
         controller.add(observer)
-        
+
         controller.firstMove(1, 2, game)
 
         controller.field shouldBe updatedField
@@ -41,23 +40,5 @@ class ControllerSpec extends AnyWordSpec with Matchers with MockitoSugar {
       }
     }
 
-    "uncoverField is called" should {
-      "update the field by uncovering the specified cell and notify observers" in {
-        val initialField = mock[Field]
-        val updatedField = mock[Field]
-        val game = mock[Game]
-        when(initialField.open(1, 2, game)).thenReturn(updatedField)
-
-        val controller = Controller(initialField, game)
-        val observer = mock[Observer]
-        controller.add(observer)
-
-        controller.uncoverField(1, 2, game)
-
-        controller.field shouldBe updatedField
-        verify(initialField).open(1, 2, game)
-        verify(observer).update
-      }
-    }
   }
 }

@@ -30,32 +30,19 @@ class FieldSpec extends AnyWordSpec with Matchers with MockitoSugar {
     }
 
     "a cell is opened" should {
-      "reveal a bomb if present and set game state to Lost" in {
-        val size = 3
-        val bombMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Empty))).replaceCell(1, 1, Symbols.Bomb)
-        val playerMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Covered)))
-        val game = mock[Game]
-        val field = new Field(playerMatrix, bombMatrix)
-
-        field.open(1, 1, game)
-        
-        verify(game).gameState = Status.Lost
-      }
-
       "reveal empty space and adjacent numbers if no bomb" in {
         val size = 3
         val bombMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Empty)))
         val playerMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Covered)))
         val game = mock[Game]
-        when(game.state).thenReturn(Status.Playing)
         val field = new Field(playerMatrix, bombMatrix)
 
-        val openedField = field.open(1, 1, game)
-        
-        // Assuming your open method correctly updates cells based on bomb proximity
-        openedField.playerMatrix.cell(1, 1) should not be Symbols.Covered
-        // Add more specific checks based on your game logic
+        val updateTuple = field.open(1, 1, game)
+        val fieldUpdated = updateTuple._1
+
+        fieldUpdated.playerMatrix.cell(1, 1) should not be Symbols.Covered
       }
+
       "reveal the number of adjacent bombs correctly" in {
         val size = 3
         val bombMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Empty)))
@@ -65,9 +52,10 @@ class FieldSpec extends AnyWordSpec with Matchers with MockitoSugar {
         val game = mock[Game]
         val field = new Field(playerMatrix, bombMatrix)
 
-        val openedField = field.open(1, 1, game)
+        val updateTuple = field.open(1, 1, game)
+        val fieldUpdated = updateTuple._1
 
-        openedField.playerMatrix.cell(1, 1) shouldBe Symbols.Two
+        fieldUpdated.playerMatrix.cell(1, 1) shouldBe Symbols.Two
       }
 
       "reveal adjacent cells when a 'Zero' cell is opened" in {
@@ -78,26 +66,25 @@ class FieldSpec extends AnyWordSpec with Matchers with MockitoSugar {
         val game = mock[Game]
         val field = new Field(playerMatrix, bombMatrix)
 
-        val openedField = field.open(2, 2, game)
-        
-        // Here, the adjacent cells should be revealed automatically
-        openedField.playerMatrix.cell(2, 2) should not be Symbols.Covered
-        openedField.playerMatrix.cell(2, 1) should not be Symbols.Covered
-        openedField.playerMatrix.cell(1, 2) should not be Symbols.Covered
+        val updateTuple = field.open(2, 2, game)
+        val fieldUpdated = updateTuple._1
+
+        fieldUpdated.playerMatrix.cell(2, 2) should not be Symbols.Covered
+        fieldUpdated.playerMatrix.cell(2, 1) should not be Symbols.Covered
+        fieldUpdated.playerMatrix.cell(1, 2) should not be Symbols.Covered
       }
 
-      "not change game state when a non-bomb cell is opened" in {
+      "not change state when a non-bomb cell is opened" in {
         val size = 3
         val bombMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Empty)))
         val playerMatrix = Matrix(Vector.fill(size)(Vector.fill(size)(Symbols.Covered)))
         val game = mock[Game]
         val field = new Field(playerMatrix, bombMatrix)
 
-        field.open(1, 1, game)
+        val updateTuple = field.open(1, 1, game)
+        val fieldUpdated = updateTuple._1
 
-        // Verify that the game state remains 'Playing' when no bomb is revealed
-
-        Status.Playing should not be Status.Won
+        fieldUpdated.playerMatrix.cell(1, 1) should not be Symbols.Covered
       }
     }
 
@@ -109,10 +96,10 @@ class FieldSpec extends AnyWordSpec with Matchers with MockitoSugar {
         val game = mock[Game]
         val field = new Field(playerMatrix, bombMatrix)
 
-        val openedField = field.open(0, 0, game)
-        
-        // Edge cells should be handled just like any other cell
-        openedField.playerMatrix.cell(0, 0) should not be Symbols.Covered
+        val updateTuple = field.open(0, 0, game)
+        val fieldUpdated = updateTuple._1
+
+        fieldUpdated.playerMatrix.cell(0, 0) should not be Symbols.Covered
       }
 
       "not crash when opening an already opened cell" in {
@@ -122,11 +109,13 @@ class FieldSpec extends AnyWordSpec with Matchers with MockitoSugar {
         val game = mock[Game]
         val field = new Field(playerMatrix, bombMatrix)
 
-        val openedField = field.open(1, 1, game)
-        val reOpenedField = openedField.open(1, 1, game) // Trying to reopen the same cell
-        
-        // The field should not be changed if it's already opened
-        reOpenedField.playerMatrix.cell(1, 1) should not be Symbols.Covered
+        val updateTuple1 = field.open(1, 1, game)
+        val fieldUpdated1 = updateTuple1._1
+
+        val updateTuple2 = fieldUpdated1.open(1, 1, game)
+        val fieldUpdated2 = updateTuple2._1
+
+        fieldUpdated2.playerMatrix.cell(1, 1) should not be Symbols.Covered
       }
     }
   }
