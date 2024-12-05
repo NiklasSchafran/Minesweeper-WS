@@ -146,6 +146,6 @@ case class Game(state: Status):
         }
         return false
     }
-
+    
     def checkGameState(realgame: Game) =
       if(this.gameState == Status.Won) println("you just won!!!") else if (this.gameState == Status.Lost) println("you just Lost!!!") else print("")

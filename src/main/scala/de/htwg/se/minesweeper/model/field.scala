@@ -19,7 +19,7 @@ case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]):
     def mesh(cellWidth: Int = 3) = 
         (0 until size).map(cells(_, cellWidth)).mkString(bar(cellWidth, size), bar(cellWidth, size), bar(cellWidth, size))
 
-
+/*
     def isBomb(x: Int, y: Int, m: Matrix[Symbols]): Boolean = {
         val si = m.size-1
         printf("isbomb si = ")
@@ -92,13 +92,13 @@ case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]):
         }
         return tmpMatrix
     }
-
+*/
 
 
     // open call a function (openFl) who has another function (openF) as parameter
     def open(x: Int, y: Int, spiel: Game): Field = 
         if(bombenMatrix.cell(y, x) == Symbols.Bomb){spiel.gameState = Status.Lost}else{
-        playerMatrix = Num(x, y, bombenMatrix, playerMatrix)}
+        playerMatrix = spiel.Num(x, y, bombenMatrix, playerMatrix)}
         val nextField = new Field(playerMatrix, bombenMatrix)
         nextField
         
