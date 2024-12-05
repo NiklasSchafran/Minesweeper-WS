@@ -12,7 +12,10 @@ case class Controller(var field: Field, game: Game) extends Observable:
         notifyObservers
 
     def uncoverField(x: Int , y: Int, game: Game) = 
-        field = field.open(x, y, game)
+        
+        val updateTupel = field.open(x, y, game)
+        field = updateTupel._1
+        game.gameState = updateTupel._2
         notifyObservers
     
     

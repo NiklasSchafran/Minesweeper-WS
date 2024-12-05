@@ -4,6 +4,7 @@ import de.htwg.se.minesweeper.controller.Controller
 import de.htwg.se.minesweeper.util.Observer
 import scala.io.StdIn.readLine
 import de.htwg.se.minesweeper.model.Move
+import de.htwg.se.minesweeper.model.Status
 
 class TUI(controller: Controller) extends Observer:
     
@@ -43,27 +44,26 @@ class TUI(controller: Controller) extends Observer:
           move.value match {
             case "open" => controller.uncoverField(move.x, move.y, game)
           }
-      game.checkGameState(game)
-      if(game.gameState == Status.Lost) System.exit(0)
-      if(game.gameState == Status.Won) System.exit(0)
+      game = controller.game 
+      if(game.gameState == Status.Lost)
+      {
+            println("you just Lost!!!")
+            System.exit(0)
+      }
       parseInputandPrintLoop()
     }
 
     def firstMoveInputParser: Unit =
-      //lets go
       println("Enter your move:")
       userIn2(readLine) match
         case None => System.exit(0)
         case Some(move) => 
           move.value match {
-            case "open" => controller.firstMove(move.x, move.y, game) // here is the change
+            case "open" => controller.firstMove(move.x, move.y, game)
           }
-      game.checkGameState(game)
-      if(game.gameState == Status.Lost) System.exit(0)
-      if(game.gameState == Status.Won) System.exit(0)
 
 
-enum Status:
-    case Playing, Won, Lost
+//enum Status:
+//    case Playing, Won, Lost
 
       
