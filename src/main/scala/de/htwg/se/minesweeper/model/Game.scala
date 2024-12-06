@@ -3,6 +3,7 @@ package de.htwg.se.minesweeper.model
 import scala.io.StdIn.readLine
 import scala.util.Random
 import de.htwg.se.minesweeper.model.Field
+import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
 case class Game(state: Status):
@@ -11,26 +12,15 @@ case class Game(state: Status):
     var side = 0
     var gameState = Status.Playing
 
-
-    def setDifficulty() = {
-            println("Enter the Difficulty Level")
-            println("0 fuer 3x3 und 1er bombe)")
-            println("1 fuer 3x3 und 6 bomben")
-            println("2 fuer 16x16 und 40 bomben")
+    private var difficultyStrategy: DifficultyStrategy = _
 
 
-            val level = scala.io.StdIn.readInt()
-
-
-            level match {
-                case 0 => (3, 1)
-                case 1 => (9, 6)
-                case 2 => (16, 40)
-                case _ => (9, 6)
-            }
-
+    def setDifficultyStrategy(strategy: DifficultyStrategy): Unit = {
+        this.difficultyStrategy = strategy
+        difficultyStrategy.setDifficulty(this)
+        printf("side = ")
+        println(side)
     }
-
     
 
 
@@ -39,7 +29,7 @@ case class Game(state: Status):
       // shows covered playField
         var anzahlcoverd = 1 // noch ändern
         var playerMatrix = new Matrix(side, Symbols.Covered)
-        val fieldstart = new Field(side, Symbols.Covered)
+        val fieldstart = FieldFactory.createField(side, Symbols.Covered)
         val emptyMatrix = new Matrix(side, Symbols.Empty)
         val bombenMatrix = setB(emptyMatrix, anzahBomben, x, y)
 
@@ -147,5 +137,5 @@ case class Game(state: Status):
         return false
     }
     
-    def checkGameState(realgame: Game) =
-      if(this.gameState == Status.Won) println("you just won!!!") else if (this.gameState == Status.Lost) println("you just Lost!!!") else print("")
+    //def checkGameState(realgame: Game) =
+      //if(this.gameState == Status.Won) println("you just won!!!") else if (this.gameState == Status.Lost) println("you just Lost!!!") else print("")

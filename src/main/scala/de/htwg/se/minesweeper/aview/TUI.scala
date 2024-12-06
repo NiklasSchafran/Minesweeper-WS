@@ -5,6 +5,7 @@ import de.htwg.se.minesweeper.util.Observer
 import scala.io.StdIn.readLine
 import de.htwg.se.minesweeper.model.Move
 import de.htwg.se.minesweeper.model.Status
+import de.htwg.se.minesweeper.difficulty.{DifficultyStrategy, EasyDifficulty, MediumDifficulty, HardDifficulty}
 
 class TUI(controller: Controller) extends Observer:
     
@@ -15,6 +16,7 @@ class TUI(controller: Controller) extends Observer:
 
     def run =
         println(controller.field.toString)
+        selectDifficulty()
         firstMoveInputParser
         parseInputandPrintLoop()
         
@@ -28,6 +30,7 @@ class TUI(controller: Controller) extends Observer:
           
           val action = charAccumulator(0) match
             case 'o' => "open"
+            case 'z' => "undo"
             case _ => "open"
           val xAxis = charAccumulator(1).toString.toInt
           val yAxis = charAccumulator(2).toString.toInt
@@ -43,6 +46,8 @@ class TUI(controller: Controller) extends Observer:
         case Some(move) => 
           move.value match {
             case "open" => controller.uncoverField(move.x, move.y, game)
+            case "undo" => controller.undo()
+            case _ => println("Unguelltige Eingabe")
           }
       game = controller.game 
       if(game.gameState == Status.Lost)
@@ -63,7 +68,21 @@ class TUI(controller: Controller) extends Observer:
           }
 
 
-//enum Status:
-//    case Playing, Won, Lost
+    def selectDifficulty(): Unit = {
+        println("Enter the Difficulty Level")
+        println("0 fuer 3x3 und 1er bombe)")
+        println("1 fuer 8x8 und 6 bomben")
+        println("2 fuer 16x16 und 40 bomben")
 
-      
+        val level = scala.io.StdIn.readInt()
+
+        val selectedStrategy: DifficultyStrategy = level match {
+            case 0 => new EasyDifficulty
+            case 1 => new MediumDifficulty
+            case 2 => new HardDifficulty
+            case _ =>  new EasyDifficulty
+        }
+        controller.setDifficulty(selectedStrategy)
+
+    }
+          
