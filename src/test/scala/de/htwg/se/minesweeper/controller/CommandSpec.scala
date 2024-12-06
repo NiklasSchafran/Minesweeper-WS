@@ -13,5 +13,14 @@ class CommandSpec extends AnyWordSpec with Matchers {
     game.side = 3
     val field = new Field(3, Symbols.Covered)
     val controller = new Controller(field, game)
+
+    "execute and uncover the field" in {
+        val initialField = controller.field.copy()
+        val command = new UncoverCommand(controller, 1, 1)
+        command.execute()
+        controller.field.playerMatrix.cell(1, 1) should not be Symbols.Covered
+        command.undo()
+        controller.field.playerMatrix.cell(1, 1) should be (Symbols.Covered)
+      }
   }
 }
