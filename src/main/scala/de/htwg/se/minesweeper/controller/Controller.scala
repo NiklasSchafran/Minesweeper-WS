@@ -10,7 +10,6 @@ import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 case class Controller(var field: Field, game: Game) extends Observable:
 
     private var undoStack: List[Command] = Nil
-    var isFirstMove: Boolean = true
     
     def firstMove(x: Int, y: Int, game: Game) = 
         field = game.premierMove(x, y, field, game)
