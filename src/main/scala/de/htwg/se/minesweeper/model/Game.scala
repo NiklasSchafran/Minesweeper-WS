@@ -23,24 +23,18 @@ case class Game(state: Status):
     }
     
 
-
-    // Function for 1st Move
     def premierMove(x: Int, y: Int, field: Field, game: Game): Field = {
-      // shows covered playField
-        var anzahlcoverd = 1 // noch ändern
-        var playerMatrix = new Matrix(side, Symbols.Covered)
-        val fieldstart = FieldFactory.createField(side, Symbols.Covered)
-        val emptyMatrix = new Matrix(side, Symbols.Empty)
-        val bombenMatrix = setB(emptyMatrix, anzahBomben, x, y)
+        val builder = new FieldBuilder()
+            .withSize(game.side)
+            .withInitialPosition(x, y)
+            .withBombCount(anzahBomben)
+            .addField(game)
 
-        val Bombstart = new Field(bombenMatrix)
-        print(Bombstart.toString())
-        
-        playerMatrix = Num(x, y, bombenMatrix, playerMatrix)
-
-        val matrixAfterMove = new Field(playerMatrix, bombenMatrix)
-        matrixAfterMove
+        val newField = builder.build()
+        newField
     }
+
+
 
   
     def inArea(x: Int, y: Int, side: Int): Boolean = {x >= 0 && x <= side && y >= 0 && y <= side}
