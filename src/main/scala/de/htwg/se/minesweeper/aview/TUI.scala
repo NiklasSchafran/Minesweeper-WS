@@ -5,6 +5,7 @@ import de.htwg.se.minesweeper.util.Observer
 import scala.io.StdIn.readLine
 import de.htwg.se.minesweeper.model.Move
 import de.htwg.se.minesweeper.model.Status
+import scala.util.{Try, Success, Failure}
 import de.htwg.se.minesweeper.difficulty.{DifficultyStrategy, EasyDifficulty, MediumDifficulty, HardDifficulty}
 
 class TUI(controller: Controller) extends Observer:
@@ -15,7 +16,7 @@ class TUI(controller: Controller) extends Observer:
     var state = controller.game.state
 
     def run =
-        println(controller.field.toString)
+        //println(controller.field.toString)
         selectDifficulty()
         firstMoveInputParser
         parseInputandPrintLoop()
@@ -41,23 +42,34 @@ class TUI(controller: Controller) extends Observer:
 
     def parseInputandPrintLoop(): Unit = {
       println("Enter your move:")
-      userIn2(readLine) match
-        case None => System.exit(0)
-        case Some(move) => 
-          move.value match {
-            case "open" => controller.uncoverField(move.x, move.y, game)
-            case "undo" => controller.undo()
-            case _ => println("Unguelltige Eingabe")
-          }
-      game = controller.game 
-      if(game.gameState == Status.Lost)
-      {
-            println("you just Lost!!!")
+      
+      val result = Try {
+        userIn2(readLine) match {
+          case None =>
+            println("Goodbye!")
             System.exit(0)
+          case Some(move) =>
+            move.value match {
+              case "open" => controller.uncoverField(move.x, move.y, game)
+              case "undo" => controller.undo()
+              case _      => println("Ungültige Eingabe")
+            }
+        }
+        game = controller.game
+        if (game.gameState == Status.Lost) {
+          println("You just lost!!!")
+          System.exit(0)
+        }
       }
-      parseInputandPrintLoop()
+      
+      result match {
+        case Success(_) => parseInputandPrintLoop()
+        case Failure(e) =>
+          println(s"Ein Fehler ist aufgetreten: ${e.getMessage}")
+          parseInputandPrintLoop()
+      }
     }
-
+    
     def firstMoveInputParser: Unit =
       println("Enter your move:")
       userIn2(readLine) match

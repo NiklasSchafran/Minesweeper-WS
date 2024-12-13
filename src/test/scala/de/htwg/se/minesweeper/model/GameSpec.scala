@@ -155,7 +155,13 @@ class GameSpec extends AnyWordSpec {
         val testField = new Field(testSide, Symbols.Covered)
    
         "return new Field after 1st move" in{
-            val testFieldAfterMove = testGame12.premierMove(1, 1, testField, testGame12)
+            val builder = new FieldBuilder()
+                .withSize(testGame12.side)
+                .withInitialPosition(1, 1)
+                .withBombCount(testGame12.anzahBomben)
+                .addField(testGame12)
+
+            val testFieldAfterMove = builder.build()
             testFieldAfterMove should not be (testField)
             testFieldAfterMove.matrix.cell(1, 1) should not be (Symbols.Covered)
         }
