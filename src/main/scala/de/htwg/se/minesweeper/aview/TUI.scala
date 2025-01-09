@@ -14,46 +14,42 @@ class TUI(controller: Controller) extends Observer:
 
     var game = controller.game
     var state = controller.game.state
+    @volatile private var difficultySelected = false
+
 
     def run =
-        //println(controller.field.toString)
         selectDifficulty()
-        firstMoveInputParser
         parseInputandPrintLoop()
         
     override def update = println(controller.field.toString())
 
-    def userIn2(input: String): Option[Move] = 
-      val moveCheck = input match
-        case "q" => None
-        case _ => {
-          val charAccumulator = input.toCharArray()
-          
-          val action = charAccumulator(0) match
-            case 'o' => "open"
-            case 'z' => "undo"
-            case _ => "open"
-          val xAxis = charAccumulator(1).toString.toInt
-          val yAxis = charAccumulator(2).toString.toInt
-          Some(Move(action, xAxis, yAxis))
-        }
-      moveCheck
+    def userIn2(input: String): Option[Move] = {
+      if (input.matches("o\\d{2}")) {
+        val xAxis = input.charAt(1).toString.toInt
+        val yAxis = input.charAt(2).toString.toInt
+        Some(Move("open", xAxis, yAxis))
+      } else {
+        None
+      }
+    }
 
 
     def parseInputandPrintLoop(): Unit = {
       println("Enter your move:")
-      
+      val input = readLine()
+
       val result = Try {
-        userIn2(readLine) match {
+        userIn2(input) match {
           case None =>
-            println("Goodbye!")
-            System.exit(0)
-          case Some(move) =>
-            move.value match {
-              case "open" => controller.uncoverField(move.x, move.y, game)
-              case "undo" => controller.undo()
-              case _      => println("Ungültige Eingabe")
+            input match {
+              case "0" => controller.setDifficulty(new de.htwg.se.minesweeper.difficulty.EasyDifficulty)
+              case "1" => controller.setDifficulty(new de.htwg.se.minesweeper.difficulty.MediumDifficulty)
+              case "2" => controller.setDifficulty(new de.htwg.se.minesweeper.difficulty.HardDifficulty)
+              case "z" =>  controller.undo()
+              case "q" => println("Goodbye2!"); System.exit(0);
+              case _ => println("Ungültige Eingabe2"); parseInputandPrintLoop()
             }
+          case Some(move) => controller.uncoverField(move.x, move.y, game)
         }
         game = controller.game
         if (game.gameState == Status.Lost) {
@@ -70,31 +66,12 @@ class TUI(controller: Controller) extends Observer:
       }
     }
     
-    def firstMoveInputParser: Unit =
-      println("Enter your move:")
-      userIn2(readLine) match
-        case None => System.exit(0)
-        case Some(move) => 
-          move.value match {
-            case "open" => controller.firstMove(move.x, move.y, game)
-          }
 
 
     def selectDifficulty(): Unit = {
-        println("Enter the Difficulty Level")
-        println("0 fuer 3x3 und 1er bombe)")
-        println("1 fuer 8x8 und 6 bomben")
-        println("2 fuer 16x16 und 40 bomben")
-
-        val level = scala.io.StdIn.readInt()
-
-        val selectedStrategy: DifficultyStrategy = level match {
-            case 0 => new EasyDifficulty
-            case 1 => new MediumDifficulty
-            case 2 => new HardDifficulty
-            case _ =>  new EasyDifficulty
-        }
-        controller.setDifficulty(selectedStrategy)
-
+      println("Enter the Difficulty Level")
+      println("0 fuer 3x3 und 1er bombe")
+      println("1 fuer 8x8 und 6 bomben")
+      println("2 fuer 16x16 und 40 bomben")
     }
           
