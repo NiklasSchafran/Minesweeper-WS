@@ -1,7 +1,7 @@
 package de.htwg.se.minesweeper.model
 
 // Field extended with 2 parameters (matrix: Matrix[Symbols], hidden: Matrix[Symbols])
-case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]):
+case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]) extends FieldInterface:
     // second constructor 
     def this(size: Int, filling: Symbols)= this(new Matrix(size, filling), new Matrix(size, Symbols.Empty))
     val size = matrix.size
@@ -22,6 +22,7 @@ case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]):
     def open(x: Int, y: Int, spiel: Game): (Field, Status) = 
         if(bombenMatrix.cell(y, x) == Symbols.Bomb){
             spiel.gameState = Status.Lost
+            playerMatrix = playerMatrix.replaceCell(y, x, Symbols.Bomb)
             val nextField = new Field(playerMatrix, bombenMatrix)
             (nextField, Status.Lost)
         }
@@ -30,6 +31,7 @@ case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]):
         (nextField, spiel.gameState)
         
 
-
+    def cell(row: Int, col: Int): Symbols = matrix.cell(row, col)
+    
     // used for printing field in main
     override def toString(): String = mesh()

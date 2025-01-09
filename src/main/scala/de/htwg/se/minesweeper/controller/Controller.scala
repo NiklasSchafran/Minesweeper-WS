@@ -7,12 +7,19 @@ import de.htwg.se.minesweeper.model.FieldFactory
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
-case class Controller(var field: Field, game: Game) extends Observable:
+case class Controller(var field: Field, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
-    
+    private var _bFirstMove: Boolean = true
+
+    def bFirstMove: Boolean = _bFirstMove
+    def bFirstMove_=(value: Boolean): Unit = {
+        _bFirstMove = value
+    }
+
     def firstMove(x: Int, y: Int, game: Game) = 
         field = game.premierMove(x, y, field, game)
+        bFirstMove = false
         notifyObservers
 
     def uncoverField(x: Int , y: Int, game: Game) = 

@@ -6,7 +6,7 @@ import de.htwg.se.minesweeper.model.Field
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
-case class Game(state: Status):
+case class Game(state: Status) extends GameInterface:
 
     var anzahBomben = 0
     var side = 0
@@ -18,8 +18,6 @@ case class Game(state: Status):
     def setDifficultyStrategy(strategy: DifficultyStrategy): Unit = {
         this.difficultyStrategy = strategy
         difficultyStrategy.setDifficulty(this)
-        printf("side = ")
-        println(side)
     }
     
 
@@ -103,8 +101,7 @@ case class Game(state: Status):
       
         val verboten = (y, x)
         var BombsMatrix = emty1Matrix
-        val sizeM = emty1Matrix.size //-1
-        println(sizeM)
+        val sizeM = emty1Matrix.size
         var AnzahlPlaziert : Int = 0
         //var BombSet: Set[(Int, Int)] = Set((y, x))
         val random = new Random()
