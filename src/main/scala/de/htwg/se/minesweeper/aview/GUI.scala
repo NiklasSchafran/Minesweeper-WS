@@ -58,6 +58,7 @@ class GUI(controller: Controller, tui: TUI) extends Frame with Observer {
   }
 
   def refreshGrid(): Unit = {
+    println("test grid")
     if (controller.field.size > 0) {
       gridPanel = new GridPanel(controller.field.size, controller.field.size) {
         preferredSize = new Dimension(600, 600)
@@ -98,5 +99,6 @@ class GUI(controller: Controller, tui: TUI) extends Frame with Observer {
     refreshGrid()
   }
 
+  open()
   refreshGrid()
 }
