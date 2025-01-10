@@ -1,6 +1,7 @@
 package de.htwg.se.minesweeper.aview
 
 import de.htwg.se.minesweeper.controller.Controller
+import de.htwg.se.minesweeper.controller.ControllerInterface
 import de.htwg.se.minesweeper.util.Observer
 import de.htwg.se.minesweeper.model.{Symbols, Status}
 import scala.swing._
@@ -9,7 +10,7 @@ import java.awt.event.{MouseEvent => AwtMouseEvent}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class GUI(controller: Controller, tui: TUI) extends Frame with Observer {
+class GUI(controller: ControllerInterface) extends Frame with Observer {
   controller.add(this)
   title = "Minesweeper"
   preferredSize = new Dimension(800, 600)

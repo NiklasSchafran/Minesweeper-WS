@@ -5,6 +5,8 @@ import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 import de.htwg.se.minesweeper.util.Observable
 
 trait ControllerInterface extends Observable {
+  def field: Field
+  def game: Game
   def bFirstMove: Boolean
   def bFirstMove_=(value: Boolean): Unit
   def firstMove(x: Int, y: Int, game: Game): Unit
@@ -12,5 +14,4 @@ trait ControllerInterface extends Observable {
   def setDifficulty(strategy: DifficultyStrategy): Unit
   def executeCommand(command: Command): Unit
   def undo(): Unit
-  override def toString: String
 }
