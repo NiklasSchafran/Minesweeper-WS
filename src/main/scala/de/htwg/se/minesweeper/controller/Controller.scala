@@ -1,9 +1,10 @@
 package de.htwg.se.minesweeper.controller
 
-import de.htwg.se.minesweeper.model.{Field, Move, Symbols}
+//import de.htwg.se.minesweeper.model.F.{Field, Move, Symbols}
 import de.htwg.se.minesweeper.util.Observable
-import de.htwg.se.minesweeper.model.Game
-import de.htwg.se.minesweeper.model.FieldFactory
+import de.htwg.se.minesweeper.model._
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 

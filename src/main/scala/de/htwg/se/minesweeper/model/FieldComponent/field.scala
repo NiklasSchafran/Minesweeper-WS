@@ -1,4 +1,10 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.FieldComponent
+
+import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.GameComponent.*
+
+
+//import de.htwg.se.minesweeper.model.GameComponent.{Game, Status}
 
 // Field extended with 2 parameters (matrix: Matrix[Symbols], hidden: Matrix[Symbols])
 case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]) extends FieldInterface:

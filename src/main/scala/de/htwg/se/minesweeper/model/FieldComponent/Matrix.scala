@@ -1,4 +1,6 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.FieldComponent
+import de.htwg.se.minesweeper.model._
+import de.htwg.se.minesweeper.model.FieldComponent.MatrixInterface
 // Matrix[T] is a class for a 2 dimensional generic Matrix
 // Primary constructor takse a Vector of Type Vector[T] witch represents the rows 
 

@@ -1,12 +1,14 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.FieldComponent
 
 import scala.io.StdIn.readLine
 import scala.util.Random
-import de.htwg.se.minesweeper.model.Field
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.Symbols
 
 
-class FieldBuilder {
+class FieldBuilder{
   private var size: Int = 0
   private var playerMatrix: Option[Matrix[Symbols]] = None
   private var bombMatrix: Option[Matrix[Symbols]] = None

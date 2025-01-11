@@ -1,10 +1,9 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.FieldComponent
 
 
 
-enum Symbols(representedAsString: String):
-    override def toString = representedAsString
-
+enum Symbols(representedAsString: String) extends SymbolsTrait:
+    override def toString: String = representedAsString
 
     case Covered extends Symbols("-")
     case Bomb extends Symbols("*")
@@ -18,3 +17,7 @@ enum Symbols(representedAsString: String):
     case Six extends Symbols("6")
     case Seven extends Symbols("7")
     case Eight extends Symbols("8")
+
+
+//enum Symbols(representedAsString: String) extends SymbolsTrait:
+    

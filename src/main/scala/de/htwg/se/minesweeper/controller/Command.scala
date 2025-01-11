@@ -1,7 +1,7 @@
 package de.htwg.se.minesweeper.controller
 
 import de.htwg.se.minesweeper.controller.Controller
-import de.htwg.se.minesweeper.model.Field
+import de.htwg.se.minesweeper.model.FieldComponent.Field
 
 class UncoverCommand(controller: Controller, x: Int, y: Int) extends Command {
     private var previousState: Option[Field] = None
