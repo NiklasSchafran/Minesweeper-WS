@@ -20,8 +20,11 @@ case class Game(state: Status) extends GameInterface:
         difficultyStrategy.setDifficulty(this)
     }
     
+    def setGameState(status: Status): Unit = {
+        gameState = status
+    }
 
-    def premierMove(x: Int, y: Int, field: Field, game: Game): Field = {
+    def premierMove(x: Int, y: Int, field: FieldInterface, game: Game): Field = {
         val builder = new FieldBuilder()
             .withSize(game.side)
             .withInitialPosition(x, y)

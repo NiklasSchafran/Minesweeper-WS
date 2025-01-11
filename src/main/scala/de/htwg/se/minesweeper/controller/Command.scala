@@ -7,7 +7,8 @@ class UncoverCommand(controller: Controller, x: Int, y: Int) extends Command {
     private var previousState: Option[Field] = None
 
     override def execute(): Unit = {
-        previousState = Some(controller.field.copy())
+        //previousState = Some(controller.field.copy())
+        previousState = Some(new Field(controller.field.playerMatrix, controller.field.bombenMatrix))
         println(controller.bFirstMove)
 
         if (controller.bFirstMove) {

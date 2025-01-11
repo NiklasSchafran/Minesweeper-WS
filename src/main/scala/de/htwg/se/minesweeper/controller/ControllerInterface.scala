@@ -6,7 +6,7 @@ import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 import de.htwg.se.minesweeper.util.Observable
 
 trait ControllerInterface extends Observable {
-  def field: Field
+  def field: FieldInterface
   def game: Game
   def bFirstMove: Boolean
   def bFirstMove_=(value: Boolean): Unit

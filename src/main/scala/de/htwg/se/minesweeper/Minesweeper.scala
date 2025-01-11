@@ -15,7 +15,10 @@ import scala.concurrent.Future
 object Minesweeper {
   def main(args: Array[String]): Unit = {
     var msGame = new Game(Status.Playing)
-    var coveredField = new Field(10, Symbols.Covered)
+    val CoveredMatrix = Matrix(Vector.fill(10, 10)(Symbols.Covered))
+    val coveredField = Field(CoveredMatrix, CoveredMatrix)
+    
+    // Die newField-Methode aufrufen, um das gewünschte Field zu erstellen
 
     val controller: ControllerInterface = Controller(coveredField, msGame)
 

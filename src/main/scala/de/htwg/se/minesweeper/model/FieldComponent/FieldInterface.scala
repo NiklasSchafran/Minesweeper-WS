@@ -5,8 +5,11 @@ import de.htwg.se.minesweeper.model.FieldComponent.*
 
 trait FieldInterface {
     val size: Int
+    var playerMatrix: Matrix[Symbols]
+    var bombenMatrix: Matrix[Symbols]
+    def newField(size: Int, filling: Symbols): FieldInterface
     def mesh(cellWidth: Int = 3): String
-    def open(x: Int, y: Int, spiel: Game): (Field, Status)
+    def open(x: Int, y: Int, spiel: GameInterface): (FieldInterface, Status)
     def cell(row: Int, col: Int): Symbols
     override def toString(): String
 }

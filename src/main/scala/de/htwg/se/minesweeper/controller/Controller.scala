@@ -8,7 +8,7 @@ import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
-case class Controller(var field: Field, game: Game) extends ControllerInterface :
+case class Controller(var field: FieldInterface, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
     private var _bFirstMove: Boolean = true
