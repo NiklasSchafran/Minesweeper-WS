@@ -1,8 +1,9 @@
 package de.htwg.se.minesweeper.model.FieldComponent
 
 import de.htwg.se.minesweeper.model.GameComponent.*
+import com.google.inject.Inject
 
-case class Field(matrix: Matrix[Symbols], bomben: Matrix[Symbols]) extends FieldInterface {
+case class Field @Inject()(matrix: Matrix[Symbols], bomben: Matrix[Symbols]) extends FieldInterface {
     val size: Int = matrix.size
     var playerMatrix: Matrix[Symbols] = matrix
     var bombenMatrix: Matrix[Symbols] = bomben

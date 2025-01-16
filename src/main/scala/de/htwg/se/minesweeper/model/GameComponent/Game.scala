@@ -4,9 +4,10 @@ import scala.io.StdIn.readLine
 import scala.util.Random
 import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
+import com.google.inject.Inject
 
 
-case class Game(state: Status) extends GameInterface:
+case class Game @Inject()() extends GameInterface:
 
     var anzahBomben = 0
     var side = 0
