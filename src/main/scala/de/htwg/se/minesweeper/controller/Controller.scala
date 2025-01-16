@@ -5,6 +5,7 @@ import de.htwg.se.minesweeper.util.Observable
 import de.htwg.se.minesweeper.model._
 import de.htwg.se.minesweeper.model.GameComponent.*
 import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.FileComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 import com.google.inject.Inject
 
@@ -39,6 +40,18 @@ case class Controller @Inject()(var field: FieldInterface, game: Game) extends C
         command.execute()
         undoStack = command :: undoStack
     }
+/*
+    def save: Unit = {
+    fileIoXml.save(grid)
+    gameStatus = SAVED
+    publish(new CellChanged)
+    }
+
+    def load: Unit = {
+        grid = fileIo.load
+        gameStatus = LOADED
+        publish(new CellChanged)
+    }*/
 
     def undo(): Unit = {
         undoStack match {
