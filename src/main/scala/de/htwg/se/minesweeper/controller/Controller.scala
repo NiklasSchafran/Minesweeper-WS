@@ -6,9 +6,10 @@ import de.htwg.se.minesweeper.model._
 import de.htwg.se.minesweeper.model.GameComponent.*
 import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
+import com.google.inject.Inject
 
 
-case class Controller(var field: FieldInterface, game: Game) extends ControllerInterface :
+case class Controller @Inject()(var field: FieldInterface, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
     private var _bFirstMove: Boolean = true
