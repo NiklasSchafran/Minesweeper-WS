@@ -1,13 +1,14 @@
 package de.htwg.se.minesweeper.controller
 
-import de.htwg.se.minesweeper.model.{Field, Move, Symbols}
+//import de.htwg.se.minesweeper.model.F.{Field, Move, Symbols}
 import de.htwg.se.minesweeper.util.Observable
-import de.htwg.se.minesweeper.model.Game
-import de.htwg.se.minesweeper.model.FieldFactory
+import de.htwg.se.minesweeper.model._
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
-case class Controller(var field: Field, game: Game) extends ControllerInterface :
+case class Controller(var field: FieldInterface, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
     private var _bFirstMove: Boolean = true

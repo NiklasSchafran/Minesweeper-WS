@@ -1,8 +1,8 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.GameComponent
 
 import scala.io.StdIn.readLine
 import scala.util.Random
-import de.htwg.se.minesweeper.model.Field
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
@@ -20,8 +20,11 @@ case class Game(state: Status) extends GameInterface:
         difficultyStrategy.setDifficulty(this)
     }
     
+    def setGameState(status: Status): Unit = {
+        gameState = status
+    }
 
-    def premierMove(x: Int, y: Int, field: Field, game: Game): Field = {
+    def premierMove(x: Int, y: Int, field: FieldInterface, game: Game): Field = {
         val builder = new FieldBuilder()
             .withSize(game.side)
             .withInitialPosition(x, y)
@@ -41,7 +44,6 @@ case class Game(state: Status) extends GameInterface:
 
     // initialises hiddenMatrix witch is initialises with bombs with adjacent Numbers
     def Num(x : Int, y : Int, bMatrix: Matrix[Symbols], pMatrix: Matrix[Symbols]): Matrix[Symbols] = {
-
 
         var tmpMatrix = pMatrix
         val si = bMatrix.size - 1
@@ -97,11 +99,11 @@ case class Game(state: Status) extends GameInterface:
         return tmpMatrix
     }
 
-    def setB(emty1Matrix: Matrix[Symbols], anzahlBomben: Int, x: Int, y: Int): Matrix[Symbols] = {
+    def setB(emptyMatrix: Matrix[Symbols], anzahlBomben: Int, x: Int, y: Int): Matrix[Symbols] = {
       
         val verboten = (y, x)
-        var BombsMatrix = emty1Matrix
-        val sizeM = emty1Matrix.size
+        var BombsMatrix = emptyMatrix
+        val sizeM = emptyMatrix.size
         var AnzahlPlaziert : Int = 0
         //var BombSet: Set[(Int, Int)] = Set((y, x))
         val random = new Random()

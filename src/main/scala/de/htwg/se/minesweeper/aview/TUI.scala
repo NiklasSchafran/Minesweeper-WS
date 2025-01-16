@@ -1,14 +1,15 @@
 package de.htwg.se.minesweeper.aview
 
 import de.htwg.se.minesweeper.controller.Controller
+import de.htwg.se.minesweeper.controller.ControllerInterface
 import de.htwg.se.minesweeper.util.Observer
 import scala.io.StdIn.readLine
-import de.htwg.se.minesweeper.model.Move
-import de.htwg.se.minesweeper.model.Status
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.minesweeper.difficulty.{DifficultyStrategy, EasyDifficulty, MediumDifficulty, HardDifficulty}
 
-class TUI(controller: Controller) extends Observer:
+class TUI(controller: ControllerInterface) extends Observer with TUIView:
     
     controller.add(this)
 
@@ -17,7 +18,7 @@ class TUI(controller: Controller) extends Observer:
     @volatile private var difficultySelected = false
 
 
-    def run =
+    def run() =
         selectDifficulty()
         parseInputandPrintLoop()
         

@@ -1,21 +1,28 @@
 package de.htwg.se.minesweeper.aview
 
 import de.htwg.se.minesweeper.controller.Controller
+import de.htwg.se.minesweeper.controller.ControllerInterface
 import de.htwg.se.minesweeper.util.Observer
-import de.htwg.se.minesweeper.model.{Symbols, Status}
+import de.htwg.se.minesweeper.aview.GUIView
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.*
 import scala.swing._
 import scala.swing.event._
 import java.awt.event.{MouseEvent => AwtMouseEvent}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class GUI(controller: Controller, tui: TUI) extends Frame with Observer {
+class GUI(controller: ControllerInterface) extends Frame with GUIView with Observer{
   controller.add(this)
   title = "Minesweeper"
   preferredSize = new Dimension(800, 600)
   var game = controller.game
   var firstM: Boolean = false
-  var tuiThread: Option[Thread] = None
+
+  private var _visible: Boolean = false
+
+  override def visible: Boolean = _visible
+  override def visible_=(v: Boolean): Unit = _visible = v
 
   var gridPanel: GridPanel = new GridPanel(controller.field.size, controller.field.size) {
     preferredSize = new Dimension(600, 600)
@@ -98,5 +105,6 @@ class GUI(controller: Controller, tui: TUI) extends Frame with Observer {
     refreshGrid()
   }
 
+  open()
   refreshGrid()
 }

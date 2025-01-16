@@ -1,4 +1,4 @@
-package de.htwg.se.minesweeper.model
+package de.htwg.se.minesweeper.model.GameComponent
 
 // Status for Game
 enum Status:
