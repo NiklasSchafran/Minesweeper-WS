@@ -14,5 +14,9 @@ trait ControllerInterface extends Observable {
   def uncoverField(x: Int, y: Int, game: Game): Unit
   def setDifficulty(strategy: DifficultyStrategy): Unit
   def executeCommand(command: Command): Unit
+  def loadWithJason(): Unit
+  def saveWithJason(): Unit
+  def loadWithXml(): Unit
+  def saveWithXml(): Unit
   def undo(): Unit
 }

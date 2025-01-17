@@ -47,6 +47,10 @@ class TUI(controller: ControllerInterface) extends Observer with TUIView:
               case "1" => controller.setDifficulty(new de.htwg.se.minesweeper.difficulty.MediumDifficulty)
               case "2" => controller.setDifficulty(new de.htwg.se.minesweeper.difficulty.HardDifficulty)
               case "z" =>  controller.undo()
+              case "sj" => controller.saveWithJason(); println("Game saved!")
+              case "lj" => controller.loadWithJason(); println("Game loaded!")
+              case "sx" => controller.saveWithXml(); println("Game saved!")
+              case "lx" => controller.loadWithXml(); println("Game loaded!")
               case "q" => println("Goodbye2!"); System.exit(0);
               case _ => println("Ungültige Eingabe2"); parseInputandPrintLoop()
             }

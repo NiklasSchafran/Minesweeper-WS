@@ -34,9 +34,9 @@ class FileIOXML extends FileIOInterface {
     val emptyMatrix = Matrix(Vector.fill(size, size)(Symbols.Empty))
     val field = Field(emptyMatrix, emptyMatrix)
     
-    // Die newField-Methode aufrufen, um das gewünschte Field zu erstellen
 
-    val newField = field.newField(size, Symbols.Covered) // Field muss FieldInterface implementieren
+
+    val newField = field.newField(size, Symbols.Covered)
     matrix.foldLeft(newField) { case (field, (row, col, value)) =>
       field.playerMatrix.replaceCell(row, col, value)
       field

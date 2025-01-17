@@ -40,18 +40,29 @@ case class Controller @Inject()(var field: FieldInterface, game: Game) extends C
         command.execute()
         undoStack = command :: undoStack
     }
-/*
-    def save: Unit = {
-    fileIoXml.save(grid)
-    gameStatus = SAVED
-    publish(new CellChanged)
+
+    def saveWithJason(): Unit = {
+        val fileIO = new FileIOJSON()
+        fileIO.save(field)
     }
 
-    def load: Unit = {
-        grid = fileIo.load
-        gameStatus = LOADED
-        publish(new CellChanged)
-    }*/
+    def loadWithJason(): Unit = {
+        val fileIO = new FileIOJSON()
+        field = fileIO.load
+        notifyObservers
+    }
+
+
+    def saveWithXml(): Unit = {
+        val fileIO = new FileIOJSON()
+        fileIO.save(field)
+    }
+
+    def loadWithXml(): Unit = {
+        val fileIO = new FileIOJSON()
+        field = fileIO.load
+        notifyObservers
+    }
 
     def undo(): Unit = {
         undoStack match {
@@ -63,3 +74,16 @@ case class Controller @Inject()(var field: FieldInterface, game: Game) extends C
     }
     
     override def toString = field.toString
+
+    /*
+    def save: Unit = {
+    fileIoXml.save(grid)
+    gameStatus = SAVED
+    publish(new CellChanged)
+    }
+
+    def load: Unit = {
+        grid = fileIo.load
+        gameStatus = LOADED
+        publish(new CellChanged)
+    }*/
