@@ -25,8 +25,9 @@ class MinesweeperModule extends AbstractModule {
 
     bind(classOf[ControllerInterface]).to(classOf[Controller])
 
-    //bind[FileIOInterface].to[FileIOJason]
-    //bind[FileIOInterface].to[FileIOXml]
+    bind(classOf[FileIOInterface]).to(classOf[FileIOJSON])
+
+ 
   }
 }
 

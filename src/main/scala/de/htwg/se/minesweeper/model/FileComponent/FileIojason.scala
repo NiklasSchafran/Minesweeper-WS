@@ -28,7 +28,6 @@ class FileIOJSON extends FileIOInterface {
     case other => Left(s"Unknown symbol: $other")
   }
 
-  // Define Encoder and Decoder for Field (assuming it's a case class)
   implicit val fieldEncoder: Encoder[Field] = deriveEncoder[Field]
   implicit val fieldDecoder: Decoder[Field] = deriveDecoder[Field]
 
@@ -38,13 +37,12 @@ class FileIOJSON extends FileIOInterface {
     val json = parse(jsonString).getOrElse(Json.Null)
     val emptyMatrix = Matrix(Vector.fill(3, 3)(Symbols.Empty))
     val field = Field(emptyMatrix, emptyMatrix)
-    // Parse the JSON into a Field object
-    json.as[Field].getOrElse(field.newField(3, Symbols.Covered)) // Field muss FieldInterface implementieren
+
+    json.as[Field].getOrElse(field.newField(3, Symbols.Covered)) 
   }
 
   override def save(field: FieldInterface): Unit = {
     val pw = new PrintWriter(new File("field.json"))
-    // Cast to Field to encode it correctly
     pw.write(field.asInstanceOf[Field].asJson.noSpaces)
     pw.close()
   }
