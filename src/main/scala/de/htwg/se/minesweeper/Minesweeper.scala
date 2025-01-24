@@ -1,12 +1,25 @@
 package de.htwg.se.minesweeper
 
-import model.Field
+import model._
+import de.htwg.se.minesweeper.controller.Controller
+import de.htwg.se.minesweeper.controller.ControllerInterface
+import de.htwg.se.minesweeper.aview.*
+import de.htwg.se.minesweeper.model.GameComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent.*
+import scala.concurrent.ExecutionContext.Implicits.global
+import com.google.inject.Guice
+import scala.concurrent.Future
 
-  object Main {
+object Minesweeper {
   def main(args: Array[String]): Unit = {
-    println("Welcome to Minesweeper")
-    val field1 = new Field(10)
-    print(field1.toString())
-    //test123
+
+    val injector = Guice.createInjector(new MinesweeperModule)
+    val controller = injector.getInstance(classOf[ControllerInterface])
+
+    val tui: TUIView = TUI(controller)
+    val gui: GUIView = new GUI(controller)
+
+    tui.run()
+    gui.visible = true
   }
 }

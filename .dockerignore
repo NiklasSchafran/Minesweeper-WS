@@ -1,0 +1,21 @@
+# Ignoriere alle Build-Artefakte
+target/
+project/target/
+project/project/
+
+# IntelliJ und Metals
+.idea/
+.metals/
+.bloop/
+
+# Sonstige temporäre Dateien
+*.log
+*.tmp
+*.bak
+
+# Systemdateien
+.DS_Store
+Thumbs.db
+
+# Exkludiere alle .git-Dateien
+.git/
