@@ -1,5 +1,5 @@
 # Basis-Image mit der angegebenen Scala-, SBT- und Java-Version
-FROM sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0
+FROM sbtscala/scala-sbt:eclipse-temurin-jammy-22_36_1.10.0_3.4.2
 
 # Update und Installation der benötigten Pakete
 RUN apt-get update && \
@@ -25,7 +25,10 @@ ENV DISPLAY=host.docker.internal:0
 WORKDIR /app
 
 # Kopiere den aktuellen Inhalt des Projekts in das Arbeitsverzeichnis
-ADD . /app
+COPY . /app
 
-# Setze das Standardkommando
-CMD ["sbt", "-Djava.awt.headless=false", "-Dawt.useSystemAAFontSettings=lcd", "-Dsun.java2d.xrender=true"]
+# Kompiliere das Projekt während des Builds (optional, falls benötigt)
+RUN sbt compile
+
+# Setze das Standardkommando, um das Projekt auszuführen
+CMD ["sbt", "run"]
