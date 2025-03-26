@@ -5,6 +5,7 @@ import com.google.inject.name.Names
 import de.htwg.se.minesweeper.controller.*
 import de.htwg.se.minesweeper.model.GameComponent.*
 import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.FileComponent.*
 
 class MinesweeperModule extends AbstractModule {
 
@@ -23,33 +24,11 @@ class MinesweeperModule extends AbstractModule {
 
 
     bind(classOf[ControllerInterface]).to(classOf[Controller])
+
+    bind(classOf[FileIOInterface]).to(classOf[FileIOJSON])
+
+ 
   }
 }
 
- // Bind constants for default settings
-    /*bindConstant().annotatedWith(Names.named("DefaultRows")).to(defaultRows)
-    bindConstant().annotatedWith(Names.named("DefaultColumns")).to(defaultColumns)
-    bindConstant().annotatedWith(Names.named("DefaultMines")).to(defaultMines)
-
-    // Bind interfaces to their implementations
-    bind[FieldInterface].to[Field]
-    bind[MatrixInterface[Symbols]].to[Matrix[Symbols]]
-    bind[ControllerInterface].to[Controller]
-
-    // Bind specific instances of Field for different presets
-    bind[FieldInterface].annotatedWithName("tiny").toInstance(new Field(
-      Matrix(Vector.fill(5, 5)(Symbols.Empty)),
-      Matrix(Vector.fill(5, 5)(Symbols.Empty))
-    ))
-    bind[FieldInterface].annotatedWithName("small").toInstance(new Field(
-      Matrix(Vector.fill(8, 8)(Symbols.Empty)),
-      Matrix(Vector.fill(8, 8)(Symbols.Empty))
-    ))
-    bind[FieldInterface].annotatedWithName("normal").toInstance(new Field(
-      Matrix(Vector.fill(10, 10)(Symbols.Empty)),
-      Matrix(Vector.fill(10, 10)(Symbols.Empty))
-    ))
-    bind[FieldInterface].annotatedWithName("large").toInstance(new Field(
-      Matrix(Vector.fill(16, 16)(Symbols.Empty)),
-      Matrix(Vector.fill(16, 16)(Symbols.Empty))
-    ))*/
+ 

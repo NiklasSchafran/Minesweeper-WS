@@ -5,14 +5,19 @@ import de.htwg.se.minesweeper.util.Observable
 import de.htwg.se.minesweeper.model._
 import de.htwg.se.minesweeper.model.GameComponent.*
 import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.FileComponent.*
+import de.htwg.se.minesweeper.MinesweeperModule
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 import com.google.inject.Inject
+import com.google.inject.Guice
 
 
 case class Controller @Inject()(var field: FieldInterface, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
     private var _bFirstMove: Boolean = true
+    val injector = Guice.createInjector(new MinesweeperModule)
+    val fileIo = injector.getInstance(classOf[FileIOInterface])
 
     def bFirstMove: Boolean = _bFirstMove
     def bFirstMove_=(value: Boolean): Unit = {
@@ -40,6 +45,17 @@ case class Controller @Inject()(var field: FieldInterface, game: Game) extends C
         undoStack = command :: undoStack
     }
 
+    def save(): Unit = {
+        fileIo.save(field)
+    }
+
+    def load(): Unit = {
+        field = fileIo.load
+        notifyObservers
+    }
+
+
+
     def undo(): Unit = {
         undoStack match {
         case Nil => println("Nothing to undo")
@@ -50,3 +66,16 @@ case class Controller @Inject()(var field: FieldInterface, game: Game) extends C
     }
     
     override def toString = field.toString
+
+    /*
+    def save: Unit = {
+    fileIoXml.save(grid)
+    gameStatus = SAVED
+    publish(new CellChanged)
+    }
+
+    def load: Unit = {
+        grid = fileIo.load
+        gameStatus = LOADED
+        publish(new CellChanged)
+    }*/
