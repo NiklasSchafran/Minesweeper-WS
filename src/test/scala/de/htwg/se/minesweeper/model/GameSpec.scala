@@ -8,7 +8,7 @@ import de.htwg.se.minesweeper.difficulty.EasyDifficulty
 class GameSpec extends AnyWordSpec {
     
     "The setDifficulty method" should {
-        val testGame = new Game(Status.Playing)
+        val testGame = new Game()
         testGame.setDifficultyStrategy(new EasyDifficulty)
 
         "initialize the game correctly" in {
@@ -33,7 +33,7 @@ class GameSpec extends AnyWordSpec {
 
 */
     "Minecheck" should{
-        val testGame6 = new Game(Status.Playing)
+        val testGame6 = new Game()
         val side4 = 3
         val mineCheckMatrix = new Matrix(side4, Symbols.Empty)
         val mineCheckMatrix2 = mineCheckMatrix.replaceCell(1, 1, Symbols.Bomb)
@@ -48,7 +48,7 @@ class GameSpec extends AnyWordSpec {
 
     "Bombs" should {
 
-        val testGame8 = new Game(Status.Playing)
+        val testGame8 = new Game()
         val side = 3
         val bombs = 8
         val testMineMatrix = new Matrix(side, Symbols.Empty)
@@ -64,7 +64,7 @@ class GameSpec extends AnyWordSpec {
 
     "Number" should{
 
-        val testGame9 = new Game(Status.Playing)
+        val testGame9 = new Game()
         val side3 = 3
         var testMatrix = new Matrix[Symbols](side3, Symbols.Empty)
         val testBombMatrix = testMatrix.replaceCell(1, 1, Symbols.Bomb)
@@ -104,7 +104,7 @@ class GameSpec extends AnyWordSpec {
     "NoNum" should{
 
             val side3 = 3
-            val testGame10 = new Game(Status.Playing)
+            val testGame10 = new Game()
             var testMatrix = new Matrix[Symbols](side3, Symbols.Empty)
             val testBombMatrix = testMatrix.replaceCell(0, 0, Symbols.Bomb)
             var testPlayerMatrix = new Matrix(side3, Symbols.Covered)
@@ -130,7 +130,7 @@ class GameSpec extends AnyWordSpec {
     "inArea" should{
 
             val side3 = 2
-            val testGame11 = new Game(Status.Playing)
+            val testGame11 = new Game()
             var testMatrix = new Matrix[Symbols](side3+1, Symbols.Empty)
             val testBombMatrix = testMatrix.replaceCell(0, 0, Symbols.Bomb)
             var testPlayerMatrix = new Matrix(side3, Symbols.Covered)
@@ -148,7 +148,7 @@ class GameSpec extends AnyWordSpec {
     }
 
     "Function premierMove" should {
-        val testGame12 = new Game(Status.Playing)
+        val testGame12 = new Game()
         testGame12.anzahBomben = 2
         testGame12.side = 3
         val testSide = 3

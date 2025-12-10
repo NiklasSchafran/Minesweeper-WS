@@ -6,7 +6,7 @@ import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
 
 
-case class Game(state: Status) extends GameInterface:
+case class Game() extends GameInterface:
 
     var anzahBomben = 0
     var side = 0

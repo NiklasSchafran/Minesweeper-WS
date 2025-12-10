@@ -9,7 +9,7 @@ import de.htwg.se.minesweeper.model.Status
 class CommandSpec extends AnyWordSpec with Matchers {
 
   "An UncoverCommand" should {
-    val game = new Game(Status.Playing)
+    val game = new Game()
     game.side = 3
     val field = new Field(3, Symbols.Covered)
     val controller = new Controller(field, game)

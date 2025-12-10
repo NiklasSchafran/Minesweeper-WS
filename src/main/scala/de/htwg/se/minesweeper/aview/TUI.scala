@@ -14,7 +14,7 @@ class TUI(controller: ControllerInterface) extends Observer with TUIView:
     controller.add(this)
 
     var game = controller.game
-    var state = controller.game.state
+    var state = controller.game.gameState
     @volatile private var difficultySelected = false
 
 

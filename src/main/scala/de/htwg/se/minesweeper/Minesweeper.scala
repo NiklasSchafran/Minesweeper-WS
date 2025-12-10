@@ -14,7 +14,7 @@ import scala.concurrent.Future
 
 object Minesweeper {
   def main(args: Array[String]): Unit = {
-    var msGame = new Game(Status.Playing)
+    var msGame = new Game()
     val CoveredMatrix = Matrix(Vector.fill(10, 10)(Symbols.Covered))
     val coveredField = Field(CoveredMatrix, CoveredMatrix)
     
