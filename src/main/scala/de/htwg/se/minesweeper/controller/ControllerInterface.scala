@@ -15,4 +15,6 @@ trait ControllerInterface extends Observable {
   def setDifficulty(strategy: DifficultyStrategy): Unit
   def executeCommand(command: Command): Unit
   def undo(): Unit
+  def load(): Unit
+  def save(): Unit
 }

@@ -6,12 +6,14 @@ import de.htwg.se.minesweeper.model._
 import de.htwg.se.minesweeper.model.GameComponent.*
 import de.htwg.se.minesweeper.model.FieldComponent.*
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
+import de.htwg.se.minesweeper.model.FileComponent.FileIOJSON
 
 
 case class Controller(var field: FieldInterface, game: Game) extends ControllerInterface :
 
     private var undoStack: List[Command] = Nil
     private var _bFirstMove: Boolean = true
+    val fileIo = new FileIOJSON()
 
     def bFirstMove: Boolean = _bFirstMove
     def bFirstMove_=(value: Boolean): Unit = {
@@ -46,6 +48,15 @@ case class Controller(var field: FieldInterface, game: Game) extends ControllerI
             head.undo()
             undoStack = tail
         }
+    }
+
+    def save(): Unit = {
+        fileIo.save(field)
+    }
+
+    def load(): Unit = {
+        field = fileIo.load
+        notifyObservers
     }
     
     override def toString = field.toString
