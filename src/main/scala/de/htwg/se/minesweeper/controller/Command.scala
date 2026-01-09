@@ -1,28 +1,27 @@
 package de.htwg.se.minesweeper.controller
 
-import de.htwg.se.minesweeper.controller.Controller
-import de.htwg.se.minesweeper.model.FieldComponent.Field
+import de.htwg.se.minesweeper.model.FieldComponent._
+import de.htwg.se.minesweeper.model.GameComponent._
 
 class UncoverCommand(controller: Controller, x: Int, y: Int) extends Command {
-    private var previousState: Option[Field] = None
 
-    override def execute(): Unit = {
-        //previousState = Some(controller.field.copy())
-        previousState = Some(new Field(controller.field.playerMatrix, controller.field.bombenMatrix))
-        println(controller.bFirstMove)
+  private var previousState: Option[Field] = None
 
-        if (controller.bFirstMove) {
-            controller.firstMove(x, y, controller.game)
-        } else {
-            val updateTupel = controller.field.open(x, y, controller.game)
-            controller.field = updateTupel._1
-            controller.game.gameState = updateTupel._2
-        }
-        controller.notifyObservers
+  override def execute(): Unit = {
+    previousState = Some(new Field(controller.field.playerMatrix, controller.field.bombenMatrix))
+
+    if (controller.bFirstMove) {
+      controller.firstMove(x, y, controller.game)
+    } else {
+      val updateTupel = controller.field.open(x, y, controller.game)
+      controller.field = updateTupel._1
+      controller.game.gameState = updateTupel._2
     }
+    controller.notifyObservers
+  }
 
-    override def undo(): Unit = {
-        previousState.foreach(state => controller.field = state)
-        controller.notifyObservers
-    }
+  override def undo(): Unit = {
+    previousState.foreach(state => controller.field = state)
+    controller.notifyObservers
+  }
 }

@@ -2,18 +2,15 @@ package de.htwg.se.minesweeper.model.FieldComponent
 
 import scala.io.StdIn.readLine
 import scala.util.Random
-import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.FieldComponent._
 import de.htwg.se.minesweeper.difficulty.DifficultyStrategy
-import de.htwg.se.minesweeper.model.GameComponent.*
-import de.htwg.se.minesweeper.model.FieldComponent.Symbols
+import de.htwg.se.minesweeper.model.GameComponent._
 
 class FieldBuilder {
   private var size: Int = 0
-  //private var playerMatrix: Option[Matrix[Symbols]] = None
-  //private var bombMatrix: Option[Matrix[Symbols]] = None
-  var playerMatrix: Option[Matrix[Symbols]] = _
+  var playerMatrix: Option[Matrix[Symbols]] = None
   var emptyMatrix: Matrix[Symbols] = _
-  var bombMatrix: Option[Matrix[Symbols]] = _
+  var bombMatrix: Option[Matrix[Symbols]] = None
   private var x: Int = 0
   private var y: Int = 0
   private var bombCount: Int = 0
@@ -35,8 +32,8 @@ class FieldBuilder {
   }
 
   def addField(game: GameInterface): FieldBuilder = {
-    this.playerMatrix = Some(new Matrix(Vector.fill(size, size)(Symbols.Covered)))
-    this.emptyMatrix = new Matrix(Vector.fill(size, size)(Symbols.Empty))
+    this.playerMatrix = Some(new Matrix(Vector.fill(size)(Vector.fill(size)(Covered))))
+    this.emptyMatrix = new Matrix(Vector.fill(size)(Vector.fill(size)(Empty)))
     this.bombMatrix = Some(game.setB(emptyMatrix, bombCount, x, y))
     this.playerMatrix = this.playerMatrix.map(pm => game.Num(x, y, this.bombMatrix.get, pm))
     this

@@ -1,4 +1,5 @@
 package de.htwg.se.minesweeper.difficulty
+
 import de.htwg.se.minesweeper.model.GameComponent.Game
 
 trait DifficultyStrategy {

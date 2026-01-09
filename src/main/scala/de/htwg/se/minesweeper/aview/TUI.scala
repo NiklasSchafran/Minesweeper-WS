@@ -4,12 +4,12 @@ import de.htwg.se.minesweeper.controller.Controller
 import de.htwg.se.minesweeper.controller.ControllerInterface
 import de.htwg.se.minesweeper.util.Observer
 import scala.io.StdIn.readLine
-import de.htwg.se.minesweeper.model.GameComponent.*
-import de.htwg.se.minesweeper.model.FieldComponent.*
+import de.htwg.se.minesweeper.model.GameComponent._
+import de.htwg.se.minesweeper.model.FieldComponent._
 import scala.util.{Try, Success, Failure}
 import de.htwg.se.minesweeper.difficulty.{DifficultyStrategy, EasyDifficulty, MediumDifficulty, HardDifficulty}
 
-class TUI(controller: ControllerInterface) extends Observer with TUIView:
+class TUI(controller: ControllerInterface) extends Observer with TUIView {
     
     controller.add(this)
 
@@ -78,3 +78,4 @@ class TUI(controller: ControllerInterface) extends Observer with TUIView:
       println("2 fuer 16x16 und 40 bomben")
     }
           
+}

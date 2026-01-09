@@ -1,10 +1,19 @@
 package de.htwg.se.minesweeper.util
 
-trait Observer:
-    def update: Unit
+trait Observer {
+  def update(): Unit
+}
 
-trait Observable:
-    var subscribers:Vector[Observer] = Vector()
-    def add(s:Observer) = subscribers = subscribers :+ s
-    def remove(s:Observer) = subscribers = subscribers.filterNot(o => o==s)
-    def notifyObservers = subscribers.foreach(o => o.update)
+trait Observable {
+
+  private var subscribers: Vector[Observer] = Vector.empty
+
+  def add(s: Observer): Unit =
+    subscribers = subscribers :+ s
+
+  def remove(s: Observer): Unit =
+    subscribers = subscribers.filterNot(_ == s)
+
+  def notifyObservers(): Unit =
+    subscribers.foreach(_.update())
+}
